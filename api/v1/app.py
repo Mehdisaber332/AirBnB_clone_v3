@@ -28,4 +28,4 @@ else:
 
 
 if __name__ == "__main__":
-    app.run(host=host, port=port, threaded=True, debug=True)
+    app.run(host=host, port=port, threaded=True)
