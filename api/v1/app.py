@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """first endpoint (route) will be to return the status of my API"""
-from os import getenv
+import os
 from flask import Flask
 from api.v1.views import app_views
 from models import storage
@@ -11,18 +11,18 @@ app.register_blueprint(app_views, url_prefix="/api/v1")
 
 
 @app.teardown_appcontext
-def close_db(ctx):
+def teardown_db(Exception=None):
     """closes storage"""
     storage.close()
 
 
-if getenv("HBNB_API_HOST"):
-    host = getenv("HBNB_API_HOST")
+if os.getenv("HBNB_API_HOST"):
+    host = os.getenv("HBNB_API_HOST")
 else:
     host = "0.0.0.0"
 
-if getenv("HBNB_API_PORT"):
-    port = int(getenv("HBNB_API_PORT"))
+if os.getenv("HBNB_API_PORT"):
+    port = int(os.getenv("HBNB_API_PORT"))
 else:
     port = 5000
 
