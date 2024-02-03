@@ -11,7 +11,7 @@ app.register_blueprint(app_views, url_prefix="/api/v1")
 
 
 @app.teardown_appcontext
-def teardown_db(exception=None):
+def teardown_db(ctx):
     """closes storage"""
     storage.close()
 
