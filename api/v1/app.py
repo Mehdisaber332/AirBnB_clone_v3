@@ -11,9 +11,14 @@ app.register_blueprint(app_views, url_prefix="/api/v1")
 
 
 @app.errorhandler(404)
-def not_found_error(error):
-    """ returns a JSON-formatted 404 status code response """
-    return make_response(jsonify({"error": "Not found"}), 404)
+def error_404(exception):
+    return {"error": "Not found"}, 404
+
+
+@app.errorhandler(400)
+def error_400(exception):
+    message = exception.description
+    return message, 400
 
 
 @app.teardown_appcontext
@@ -33,5 +38,4 @@ else:
 
 
 if __name__ == "__main__":
-    host = getenv('HBNB_API_HOST', default='0.0.0.0')
-    port = int(getenv('HBNB_API_PORT', default=5000))
+    app.run(host=host, port=port, threaded=True)
