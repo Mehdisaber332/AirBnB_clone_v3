@@ -11,11 +11,6 @@ app.register_blueprint(app_views)
 
 
 @app.errorhandler(404)
-def error_404(exception):
-    return {"error": "Not found"}, 404
-
-
-@app.errorhandler(404)
 def not_found_error(error):
     """ returns a JSON-formatted 404 status code response """
     return make_response(jsonify({"error": "Not found"}), 404)
